@@ -69,14 +69,20 @@ class LinkedList:
                 else:
                     previous = current
                     current = current.next
+            if self.tail.value == val:
+                if previous is not None:
+                    self.tail = previous
+                else:
+                    self.tail = None
             return True
 
-
     def clean(self):
-        node = self.head
-        node.value = None
-        node.next = None
-
+        start = self.head
+        end = self.tail
+        if start is not None:
+            start.value = None
+            start.next = None
+            end.value = None
 
     def len(self):
         node = self.head
@@ -89,3 +95,5 @@ class LinkedList:
     def insert(self, afterNode, newNode):
         newNode.next = afterNode.next
         afterNode.next = newNode
+        if afterNode is self.tail:
+            self.tail = newNode
