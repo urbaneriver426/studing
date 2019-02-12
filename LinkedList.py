@@ -52,7 +52,7 @@ class LinkedList:
                         previous.next = current.next
                     else:
                         self.head = current.next
-                        return True
+                    return True
                 else:
                     previous = current
                     current = current.next
