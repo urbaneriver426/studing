@@ -50,6 +50,7 @@ class LinkedList:
                 if current.value == val:
                     if previous is not None:
                         previous.next = current.next
+                        current = None
                     else:
                         self.head = current.next
                     return True
