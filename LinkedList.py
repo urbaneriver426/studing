@@ -50,8 +50,12 @@ class LinkedList:
                 if current.value == val:
                     if previous is not None:
                         previous.next = current.next
+                        if current.next == None:
+                            self.tail = previous
                     else:
-                        self.head = current.next
+                        self.head = self.head.next
+                        if self.head == None:
+                            self.tail = None
                     return True
                 else:
                     previous = current
@@ -77,12 +81,8 @@ class LinkedList:
             return True
 
     def clean(self):
-        start = self.head
-        end = self.tail
-        if start is not None:
-            start.value = None
-            start.next = None
-            end.value = None
+        self.head = None
+        self.tail = None
 
     def len(self):
         node = self.head
