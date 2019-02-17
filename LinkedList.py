@@ -81,8 +81,9 @@ class LinkedList:
             return True
 
     def clean(self):
-        self.head = None
-        self.tail = None
+        if self.head is not None:
+            self.head = None
+            self.tail = None
 
     def len(self):
         node = self.head
