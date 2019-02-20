@@ -46,25 +46,42 @@ class LinkedList:
         current = self.head
         previous = None
         count = 0
-        while current is not None:
+        if all==False:
+            while current is not None:
                 if current.value == val:
                     if previous is not None:
                         previous.next = current.next
                         if current.next == None:
                             self.tail = previous
-                        if all==True:
-                            current = current.next
-                            count += 1
-                        else:
-                            return True
                     else:
                         self.head = self.head.next
                         if self.head == None:
                             self.tail = None
+                    return True
                 else:
                     previous = current
                     current = current.next
-            if count > 0:
+            return False
+        else:
+            while current is not None:
+                if current.value == val:
+                    count = 1
+                    if previous is not None:
+                        previous.next = current.next
+                        if current.next == None:
+                            self.tail = previous
+                        else:
+                            current = current.next
+                    else:
+                        self.head = self.head.next
+                        if self.head is not None:
+                            current = current.next
+                        else:
+                            self.tail = None
+                else:
+                    previous = current
+                    current = current.next
+            if count != 0:
                 return True
             else:
                 return False
