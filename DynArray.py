@@ -1,4 +1,5 @@
-import ctypes
+mport ctypes
+import unittest
 
 class DynArray:
 	
@@ -34,27 +35,32 @@ class DynArray:
 	def insert(self, i, itm):
 		if i < 0 or i > self.count or i > self.capacity:
 			raise IndexError('Index is out of bounds')
-		for j in range (i, self.count+1):
-			if j == i:
-				x = self.array[j]
-				self.array[j] = itm
-			elif j < self.count:
-				self.array[j], x = x, self.array[j]
-			else:
-				self.append(x)
+		if i == self.count:
+			self.append(itm)
+		else:
+			for j in range (i, self.count+1):
+				if j == i:
+					if self.count != 0:
+						x = self.array[j]
+						self.array[j] = itm
+					else:
+						self.append(itm)
+				elif j < self.count:
+					self.array[j], x = x, self.array[j]
+				else:
+					self.append(x)
 
 	def delete(self, i):
 		if i < 0 or i > self.count or i > self.capacity:
 			raise IndexError('Index is out of bounds')
-		for j in range(self.count-1, i-1, -1):
-			if j == self.count-1:
-				prev = self.array[j]
-			elif j != i:
-				self.array[j], prev = prev, self.array[j]
+		for j in range(i,self.count):
+			if j != self.count-1:
+				self.array[j] = self.array[j+1]
 			else:
-				self.array[j] = prev
 				self.count -= 1
 		new_capacity = self.capacity		
 		if self.capacity > 16 and self.count < self.capacity / 2:
 			new_capacity = int(self.capacity//1.5)
+			if new_capacity < 16:
+				new_capacity = 16
 		self.resize(new_capacity)
