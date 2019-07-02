@@ -1,4 +1,4 @@
-mport ctypes
+import ctypes
 import unittest
 
 class DynArray:
