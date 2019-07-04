@@ -1,5 +1,4 @@
 import ctypes
-import unittest
 
 class DynArray:
 	
@@ -51,7 +50,7 @@ class DynArray:
 					self.append(x)
 
 	def delete(self, i):
-		if i < 0 or i > self.count or i > self.capacity:
+		if i < 0 or i > self.count or i > self.capacity or self.count == 0:
 			raise IndexError('Index is out of bounds')
 		for j in range(i,self.count):
 			if j != self.count-1:
